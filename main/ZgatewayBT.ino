@@ -115,6 +115,7 @@ void btScanWDG() {
       scanCount != 0 &&
       (now - lastBtScan > BTConfig.BLEinterval)) {
     Log.error(F("BLE Scan watchdog triggered at : %ds" CR), lastBtScan / 1000);
+    stopProcessing();
     ESPRestart(4);
   } else {
     previousBtScanCount = scanCount;
@@ -903,7 +904,7 @@ void setupBTTasksAndBLE() {
   xTaskCreatePinnedToCore(
       procBLETask, /* Function to implement the task */
       "procBLETask", /* Name of the task */
-      5120, /* Stack size in bytes */
+      7000, /* Stack size in bytes */
       NULL, /* Task input parameter */
       2, /* Priority of the task (set higher than core task) */
       &xProcBLETaskHandle, /* Task handle. */
