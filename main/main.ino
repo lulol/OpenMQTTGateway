@@ -1962,6 +1962,7 @@ void loop() {
         timer_sys_checks = millis();
       }
 #endif
+      emptyQueue();
 #ifdef ZsensorBME280
       MeasureTempHumAndPressure(); //Addon to measure Temperature, Humidity, Pressure and Altitude with a Bosch BME280/BMP280
 #endif
@@ -2042,7 +2043,6 @@ void loop() {
       if (SYSConfig.discovery)
         launchBTDiscovery(publishDiscovery);
 #  endif
-      emptyQueue();
 #endif
 #ifdef ZgatewaySRFB
       SRFBtoMQTT();
